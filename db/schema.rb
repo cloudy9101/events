@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624150009) do
+ActiveRecord::Schema.define(version: 20160625014543) do
 
   create_table "accesses", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,6 +34,25 @@ ActiveRecord::Schema.define(version: 20160624150009) do
 
   add_index "comments", ["todo_id"], name: "index_comments_on_todo_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "eventable_type"
+    t.integer  "eventable_id"
+    t.string   "target"
+    t.integer  "action"
+    t.string   "old_target"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "events", ["eventable_id"], name: "index_events_on_eventable_id"
+  add_index "events", ["eventable_type"], name: "index_events_on_eventable_type"
+  add_index "events", ["project_id"], name: "index_events_on_project_id"
+  add_index "events", ["team_id"], name: "index_events_on_team_id"
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -62,11 +81,14 @@ ActiveRecord::Schema.define(version: 20160624150009) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "team_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.boolean  "deleted",          default: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "todos", ["assigned_user_id"], name: "index_todos_on_assigned_user_id"
+  add_index "todos", ["deleted"], name: "index_todos_on_deleted"
   add_index "todos", ["due_on"], name: "index_todos_on_due_on"
   add_index "todos", ["project_id"], name: "index_todos_on_project_id"
   add_index "todos", ["status"], name: "index_todos_on_status"
