@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'create event callbacks' do
+    let(:comment) { build(:comment) }
+
+    context '#create' do
+      it 'will create act_comment' do
+        comment.save
+        expect(comment.todo.events.last.action).to eq('act_comment')
+      end
+    end
+  end
 end

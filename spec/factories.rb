@@ -8,4 +8,10 @@ FactoryGirl.define do
       "username#{n}"
     end
   end
+
+  factory :comment do
+    user
+    todo
+    content 'comment content'
+  end
 end
