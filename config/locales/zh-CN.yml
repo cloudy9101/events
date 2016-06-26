@@ -1,0 +1,11 @@
+zh-CN:
+  events:
+    index:
+      Todo: '任务'
+      act_create: '创建了%{eventable}'
+      act_delete: '删除了%{eventable}'
+      act_complete: '完成了%{eventable}'
+      act_assign_user: '给 %{target} 指派了'
+      act_modify_assigned_user: '将%{eventable}完成者从 %{old_target} 修改为 %{target}'
+      act_modify_due_on: '将%{eventable}完成时间从 %{old_target} 修改为 %{target}'
+      act_comment: '评论了%{eventable}'

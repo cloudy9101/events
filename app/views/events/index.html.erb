@@ -1,0 +1,9 @@
+<h1>Events</h1>
+<ul>
+  <%- @events.each do |event| %>
+    <li>
+      <%= event.created_at.strftime("%H:%M") %> | <%= event.user.username %> <%= t(".#{event.action}", eventable: t(".#{event.eventable.class.name}"), target: event.target, old_target: event.old_target) %> | content: <%= event.eventable.title %> 
+      <%= event.content %>
+    </li>
+  <%- end %>
+</ul>
