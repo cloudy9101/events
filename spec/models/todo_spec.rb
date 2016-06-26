@@ -4,11 +4,10 @@ RSpec.describe Todo, type: :model do
   describe '#delete' do
     let(:todo) { create(:todo) }
 
-    it 'will remove from default scope' do
-      expect(Todo.find_by_id(todo.id)).to eq(todo)
+    it 'will remove from visible scope' do
       todo.delete
-      expect(Todo.find_by_id(todo.id)).to eq(nil)
-      expect(Todo.unscoped.find_by_id(todo.id)).to eq(todo)
+      expect(Todo.find_by_id(todo.id)).to eq(todo)
+      expect(Todo.visible.find_by_id(todo.id)).to eq(nil)
     end
   end
 
